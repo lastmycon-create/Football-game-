@@ -1,0 +1,275 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Anton", "Arial Narrow", Impact, sans-serif;
+  --font-sans: "Manrope", ui-sans-serif, system-ui, -apple-system, sans-serif;
+
+  --color-ink: #0a0c09;
+  --color-ink-2: #10140f;
+  --color-ink-3: #171c15;
+  --color-line: #2a3027;
+  --color-volt: #d8ff3e;
+  --color-volt-dim: #a8cc23;
+  --color-cream: #f3f1e6;
+  --color-muted: #9aa393;
+  --color-coral: #ff6b4a;
+  --color-sky: #7dd3fc;
+  --color-gold: #ffce4f;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background: var(--color-ink);
+    color: var(--color-cream);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overscroll-behavior-y: none;
+  }
+
+  ::selection {
+    background: var(--color-volt);
+    color: var(--color-ink);
+  }
+
+  button,
+  a {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  button:focus-visible,
+  a:focus-visible,
+  input:focus-visible,
+  [tabindex]:focus-visible {
+    outline: 2px solid var(--color-volt);
+    outline-offset: 3px;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0d100c;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #333c2d;
+    border-radius: 99px;
+    border: 2px solid #0d100c;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #4c5a3e;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.055;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.8'/%3E%3C/svg%3E");
+  }
+
+  .pitch-grid {
+    background-image:
+      linear-gradient(to right, rgba(216, 255, 62, 0.055) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(216, 255, 62, 0.055) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+
+  .dot-grid {
+    background-image: radial-gradient(rgba(216, 255, 62, 0.16) 1px, transparent 1px);
+    background-size: 18px 18px;
+  }
+
+  .stack-shadow {
+    box-shadow: 0 24px 80px -24px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(255, 255, 255, 0.04);
+  }
+
+  .volt-glow {
+    box-shadow: 0 0 0 1px rgba(216, 255, 62, 0.5), 0 10px 40px -8px rgba(216, 255, 62, 0.4);
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+
+  .stroke-text {
+    -webkit-text-stroke: 1.5px rgba(243, 241, 230, 0.18);
+    color: transparent;
+  }
+
+  .animate-marquee {
+    animation: marquee 26s linear infinite;
+  }
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+  .animate-pop {
+    animation: pop 0.3s cubic-bezier(0.2, 1.4, 0.5, 1);
+  }
+  .animate-rise {
+    animation: rise 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  .animate-fade {
+    animation: fade 0.25s ease-out both;
+  }
+  .animate-blink {
+    animation: blink 2s ease-in-out infinite;
+  }
+  .animate-shimmer {
+    background-size: 200% 100%;
+    animation: shimmer 2.4s linear infinite;
+  }
+  .hold-still {
+    animation-play-state: paused;
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(var(--float-rotate, 0deg));
+  }
+  50% {
+    transform: translateY(-12px) rotate(var(--float-rotate, 0deg));
+  }
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(0.86);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes rise {
+  from {
+    transform: translateY(18px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@keyframes confetti-fall {
+  0% {
+    transform: translate3d(0, -10vh, 0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(var(--drift, 20px), 105vh, 0) rotate(680deg);
+    opacity: 0;
+  }
+}
+
+/* Landscape phone layouts: compress the game chrome so the pitch stays readable. */
+@media (orientation: landscape) and (max-height: 600px) {
+  .game-scorebar {
+    height: 46px !important;
+  }
+  .game-scorebar .score-team {
+    display: none !important;
+  }
+  .game-controls {
+    padding-top: 4px;
+    padding-bottom: calc(4px + env(safe-area-inset-bottom));
+  }
+  .game-controls .joystick-base {
+    width: 80px !important;
+    height: 80px !important;
+  }
+  .game-controls .action-primary {
+    width: 60px !important;
+    height: 60px !important;
+  }
+  .game-controls .action-skill {
+    width: 50px !important;
+    height: 50px !important;
+  }
+  .game-controls .keyboard-hints {
+    display: none !important;
+  }
+  .game-controls .joystick-label {
+    display: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
